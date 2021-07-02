@@ -5,6 +5,8 @@
 //  Created by Nurtugan Nuraly on 6/13/21.
 //
 
+// cmd + option + p
+
 import SwiftUI
 
 struct ContentView: View {
@@ -107,6 +109,11 @@ struct PopularDestinationsView: View {
 }
 
 struct PopularRestaurantsView: View {
+    let restaurants: [Restaurant] = [
+        .init(name: "Japan's Finest Tapas", imageName: "tapas"),
+        .init(name: "Bar & Grill", imageName: "bar_grill")
+    ]
+    
     var body: some View {
         VStack {
             HStack {
@@ -120,13 +127,39 @@ struct PopularRestaurantsView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
-                    ForEach(0..<5, id: \.self) { _ in
-                        Spacer()
-                            .frame(width: 200, height: 64)
-                            .background(Color.gray)
-                            .cornerRadius(5)
-                            .shadow(color: .gray, radius: 4, x: 0, y: 2)
-                            .padding(.bottom)
+                    ForEach(restaurants, id: \.self) { restaurant in
+                        HStack(spacing: 8) {
+                            Image(restaurant.imageName)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 60, height: 60)
+                                .clipped()
+                                .cornerRadius(5)
+                                .background(Color.gray)
+                                .padding(.leading, 6)
+                                .padding(.vertical, 6)
+                            VStack(alignment: .leading, spacing: 6) {
+                                HStack {
+                                    Text(restaurant.name)
+                                    Spacer()
+                                    Button(action: {}, label: {
+                                        Image(systemName: "ellipsis")
+                                            .foregroundColor(.gray)
+                                    })
+                                }
+                                HStack {
+                                    Image(systemName: "star.fill")
+                                    Text("4.7 • Sushi • $$")
+                                }
+                                Text("Tokyo, Japan")
+                            }.font(.system(size: 12, weight: .semibold))
+                            Spacer()
+                        }
+                        .frame(width: 240)
+                        .background(Color(white: 0.9, opacity: 1))
+                        .cornerRadius(5)
+                        .shadow(color: .gray, radius: 4, x: 0, y: 2)
+                        .padding(.bottom)
                     }
                 }.padding(.horizontal)
             }
@@ -135,6 +168,11 @@ struct PopularRestaurantsView: View {
 }
 
 struct TrendingCreatorsView: View {
+    let users: [User] = [
+        .init(name: "Amy Adams", imageName: "amy"),
+        .init(name: "Billy", imageName: "billy"),
+        .init(name: "Sam Smith", imageName: "sam")
+    ]
     var body: some View {
         VStack {
             HStack {
@@ -147,14 +185,21 @@ struct TrendingCreatorsView: View {
             .padding(.top)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(0..<15, id: \.self) { _ in
-                        Spacer()
-                            .frame(width: 50, height: 50)
-                            .background(Color.gray)
-                            .cornerRadius(.infinity)
-                            .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
-                            .padding(.bottom)
+                HStack(alignment: .top, spacing: 12) {
+                    ForEach(users, id: \.self) { user in
+                        VStack {
+                            Image(user.imageName)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 60, height: 60)
+                                .cornerRadius(60)
+                            Text(user.name)
+                                .font(.system(size: 11, weight: .semibold))
+                                .multilineTextAlignment(.center)
+                        }
+                        .frame(width: 60)
+                        .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
+                        .padding(.bottom)
                     }
                 }.padding(.horizontal)
             }
