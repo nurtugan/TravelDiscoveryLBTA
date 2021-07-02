@@ -15,6 +15,7 @@
 		67B63447268F680A0084E758 /* PopularRestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B63446268F680A0084E758 /* PopularRestaurantsView.swift */; };
 		67B6344A268F68400084E758 /* TrendingCreatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B63449268F68400084E758 /* TrendingCreatorsView.swift */; };
 		67B6344D268F68600084E758 /* DiscoverCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6344C268F68600084E758 /* DiscoverCategoriesView.swift */; };
+		67B63451268F6CD80084E758 /* TileModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B63450268F6CD80084E758 /* TileModifier.swift */; };
 		67EB45B526760C730086538A /* TravelDiscoveryLBTAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EB45B426760C730086538A /* TravelDiscoveryLBTAApp.swift */; };
 		67EB45B726760C730086538A /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67EB45B626760C730086538A /* DiscoverView.swift */; };
 		67EB45B926760C740086538A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67EB45B826760C740086538A /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		67B63446268F680A0084E758 /* PopularRestaurantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularRestaurantsView.swift; sourceTree = "<group>"; };
 		67B63449268F68400084E758 /* TrendingCreatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCreatorsView.swift; sourceTree = "<group>"; };
 		67B6344C268F68600084E758 /* DiscoverCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCategoriesView.swift; sourceTree = "<group>"; };
+		67B63450268F6CD80084E758 /* TileModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileModifier.swift; sourceTree = "<group>"; };
 		67EB45B126760C730086538A /* TravelDiscoveryLBTA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelDiscoveryLBTA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67EB45B426760C730086538A /* TravelDiscoveryLBTAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDiscoveryLBTAApp.swift; sourceTree = "<group>"; };
 		67EB45B626760C730086538A /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
@@ -72,6 +74,14 @@
 			path = Discover;
 			sourceTree = "<group>";
 		};
+		67B6344F268F6CBE0084E758 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				67B63450268F6CD80084E758 /* TileModifier.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		67EB45A826760C730086538A = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,7 @@
 		67EB45B326760C730086538A /* TravelDiscoveryLBTA */ = {
 			isa = PBXGroup;
 			children = (
+				67B6344F268F6CBE0084E758 /* Utils */,
 				67B63440268F65DE0084E758 /* Discover */,
 				6766A74B267793190042C65A /* Models */,
 				67EB45B426760C730086538A /* TravelDiscoveryLBTAApp.swift */,
@@ -179,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67B6343B268F5D2D0084E758 /* Restaurant.swift in Sources */,
+				67B63451268F6CD80084E758 /* TileModifier.swift in Sources */,
 				67B63447268F680A0084E758 /* PopularRestaurantsView.swift in Sources */,
 				67EB45B726760C730086538A /* DiscoverView.swift in Sources */,
 				67B6343E268F5D3F0084E758 /* User.swift in Sources */,

@@ -9,6 +9,10 @@
 
 import SwiftUI
 
+extension Color {
+    static let discoverBackground = Color(white: 0.95, opacity: 1)
+}
+
 struct DiscoverView: View {
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [
@@ -21,7 +25,7 @@ struct DiscoverView: View {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9764705882, green: 0.7098039216, blue: 0.2705882353, alpha: 1)), Color(#colorLiteral(red: 0.9686769843, green: 0.5573006272, blue: 0.2894451618, alpha: 1))]), startPoint: .top, endPoint: .center)
                     .ignoresSafeArea()
-                Color(white: 0.95, opacity: 1)
+                Color.discoverBackground
                     .offset(y: 400)
                 ScrollView {
                     HStack {
@@ -39,7 +43,7 @@ struct DiscoverView: View {
                         PopularDestinationsView()
                         PopularRestaurantsView()
                         TrendingCreatorsView()
-                    }.background(Color(white: 0.95, opacity: 1))
+                    }.background(Color.discoverBackground)
                     .cornerRadius(16)
                     .padding(.top, 32)
                 }

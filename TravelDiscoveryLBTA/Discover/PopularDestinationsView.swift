@@ -45,9 +45,7 @@ struct PopularDestinationsView: View {
                                 .padding(.bottom, 8)
                                 .foregroundColor(.secondary)
                         }
-                        .background(Color.white)
-                        .cornerRadius(5)
-                        .shadow(color: Color(.sRGB, white: 0.8, opacity: 1), radius: 4, x: 0, y: 2)
+                        .asTile()
                         .padding(.bottom)
                     }
                 }.padding(.horizontal)
@@ -58,7 +56,7 @@ struct PopularDestinationsView: View {
 
 struct PopularDestinationsView_Previews: PreviewProvider {
     static var previews: some View {
-        PopularDestinationsView()
         DiscoverView()
+        PopularDestinationsView()
     }
 }
