@@ -43,19 +43,56 @@ struct DiscoverCategoriesView: View {
     }
 }
 
+final class CategoryDetailsViewModel: ObservableObject {
+    @Published var isLoading = true
+    @Published var places: [Int] = []
+    
+    init() {
+    }
+}
+
+struct ActivityIndicatorView: UIViewRepresentable {
+    typealias UIViewType = UIActivityIndicatorView
+    
+    func makeUIView(context: Context) -> UIActivityIndicatorView {
+        let aiv = UIActivityIndicatorView(style: .large)
+        aiv.startAnimating()
+        aiv.color = .white
+        return aiv
+    }
+    
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: Context) {}
+}
+
 struct CategoryDetailsView: View {
+    @ObservedObject var vm = CategoryDetailsViewModel()
+    
     var body: some View {
-        ScrollView {
-            ForEach(0..<5, id: \.self) { _ in
-                VStack(alignment: .leading, spacing: 0) {
-                    Image("art1")
-                        .resizable()
-                        .scaledToFill()
-                    Text("Demo")
-                        .font(.system(size: 12, weight: .semibold))
-                        .padding()
-                }.asTile()
+        ZStack {
+            if vm.isLoading {
+                VStack {
+                    ActivityIndicatorView()
+                    Text("Loading...")
+                        .foregroundColor(.white)
+                        .font(.system(size: 16, weight: .semibold))
+                }
                 .padding()
+                .background(Color(white: 0.2, opacity: 1))
+                .cornerRadius(8)
+            } else {
+                ScrollView {
+                    ForEach(vm.places, id: \.self) { _ in
+                        VStack(alignment: .leading, spacing: 0) {
+                            Image("art1")
+                                .resizable()
+                                .scaledToFill()
+                            Text("Demo")
+                                .font(.system(size: 12, weight: .semibold))
+                                .padding()
+                        }.asTile()
+                        .padding()
+                    }
+                }
             }
         }.navigationBarTitle("Category", displayMode: .inline)
     }
