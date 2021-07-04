@@ -45,7 +45,7 @@ struct PopularDestinationsView: View {
 struct PopularDestinationsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PopularDestinationDetailsView(destination: .init(name: "Tokyo", country: "Japan", imageName: "japan", latitude: 35.679693, longitude: 139.771913))
+            PopularDestinationDetailsView(destination: .init(name: "Paris", country: "France", imageName: "eiffel_tower", latitude: 48.859565, longitude: 2.353235))
         }
         DiscoverView()
         PopularDestinationsView()
@@ -54,7 +54,13 @@ struct PopularDestinationsView_Previews: PreviewProvider {
 
 struct PopularDestinationDetailsView: View {
     let destination: Destination
+    let attractions: [Attraction] = [
+        .init(name: "Eiffel Tower", latitude: 48.858605, longitude: 2.2946),
+        .init(name: "Champs-Elysees", latitude: 48.866867, longitude: 2.311780),
+        .init(name: "Louvre Museum", latitude: 48.860288, longitude: 2.337789)
+    ]
     @State var region: MKCoordinateRegion
+    @State var isShowingAttractions = false
     
     init(destination: Destination) {
         self.destination = destination
@@ -66,7 +72,7 @@ struct PopularDestinationDetailsView: View {
             Image(destination.imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(height: 250)
+                .frame(height: 150)
                 .clipped()
             VStack(alignment: .leading) {
                 Text(destination.name)
@@ -78,7 +84,7 @@ struct PopularDestinationDetailsView: View {
                             .foregroundColor(.orange)
                     }
                 }.padding(.top, 2)
-                Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.")
+                Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")
                     .padding(.top, 4)
                     .font(.system(size: 14))
                 HStack { Spacer() }
@@ -87,11 +93,27 @@ struct PopularDestinationDetailsView: View {
                 Text("Location")
                     .font(.system(size: 18, weight: .bold))
                 Spacer()
+                Button(
+                    action: { isShowingAttractions.toggle() },
+                    label: {
+                        Text("\(isShowingAttractions ? "Hide" : "Show") Attractions")
+                            .font(.system(size: 12, weight: .semibold))
+                    }
+                )
+                Toggle("", isOn: $isShowingAttractions)
+                    .labelsHidden()
             }.padding(.horizontal)
-            Map(coordinateRegion: $region)
-                .frame(height: 200)
+            Map(coordinateRegion: $region, annotationItems: isShowingAttractions ? attractions : []) { attraction in
+                MapMarker(coordinate: .init(latitude: attraction.latitude, longitude: attraction.longitude), tint: .blue)
+            }.frame(height: 300)
         }.navigationBarTitle(destination.name, displayMode: .inline)
     }
+}
+
+struct Attraction: Identifiable {
+    let id = UUID().uuidString
+    let name: String
+    let latitude, longitude: Double
 }
 
 struct PopularDestinationTileView: View {
