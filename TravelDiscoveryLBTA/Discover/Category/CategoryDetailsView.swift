@@ -46,9 +46,13 @@ struct CategoryDetailsView: View {
                                 AnimatedImage(url: URL(string: place.thumbnail))
                                     .resizable()
                                     .scaledToFill()
-                                Text(place.name)
-                                    .font(.system(size: 12, weight: .semibold))
-                                    .padding()
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(place.name)
+                                        .font(.system(size: 14, weight: .semibold))
+                                    Text(place.country)
+                                        .font(.system(size: 13))
+                                        .foregroundColor(.gray)
+                                }.padding(.all, 10)
                             }.asTile()
                             .padding()
                         }
@@ -62,7 +66,7 @@ struct CategoryDetailsView: View {
 struct CategoryDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CategoryDetailsView(name: "Food")
+            CategoryDetailsView(name: "Art")
         }
     }
 }

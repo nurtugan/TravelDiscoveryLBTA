@@ -8,5 +8,5 @@
 import Foundation
 
 struct Place: Decodable, Hashable {
-    let name, thumbnail: String
+    let name, thumbnail, country: String
 }
