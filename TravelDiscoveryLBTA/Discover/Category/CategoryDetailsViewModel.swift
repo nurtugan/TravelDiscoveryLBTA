@@ -17,18 +17,20 @@ final class CategoryDetailsViewModel: ObservableObject {
                 .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
-            self.isLoading = false
-            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
-            guard 200...299 ~= statusCode,
-                  let data = data else {
-                self.errorMessage = "Something went wrong. Status code: \(statusCode)"
-                return
-            }
-            do {
-                self.places = try JSONDecoder().decode([Place].self, from: data)
-            } catch {
-                print(error.localizedDescription)
-                self.errorMessage = error.localizedDescription
+            DispatchQueue.main.async {
+                self.isLoading = false
+                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
+                guard 200...299 ~= statusCode,
+                      let data = data else {
+                    self.errorMessage = "Something went wrong. Status code: \(statusCode)"
+                    return
+                }
+                do {
+                    self.places = try JSONDecoder().decode([Place].self, from: data)
+                } catch {
+                    print(error.localizedDescription)
+                    self.errorMessage = error.localizedDescription
+                }
             }
         }.resume()
     }
