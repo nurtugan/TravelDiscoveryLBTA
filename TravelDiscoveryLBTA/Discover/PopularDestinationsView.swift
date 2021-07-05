@@ -69,8 +69,8 @@ struct PopularDestinationDetailsView: View {
     
     var body: some View {
         ScrollView {
-            DestinationHeaderView(imageNames: ["eiffel_tower", "art1", "art2"])
-                .frame(height: 250)
+            DestinationHeaderView(imageURLStrings: DestinationHeaderView_Previews.imageURLStrings)
+                .frame(height: 300)
             VStack(alignment: .leading) {
                 Text(destination.name)
                     .font(.system(size: 18, weight: .bold))
