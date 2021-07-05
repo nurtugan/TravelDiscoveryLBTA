@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct DestinationHeaderView: UIViewControllerRepresentable {
+    let imageNames: [String]
+    
+    init(imageNames: [String]) {
+        self.imageNames = imageNames
+    }
+    
     func makeUIViewController(context: Context) -> UIViewController {
-        let vc = CustomPageViewController()
+        let vc = CustomPageViewController(imageNames: imageNames)
         return vc
     }
     
@@ -17,19 +23,21 @@ struct DestinationHeaderView: UIViewControllerRepresentable {
 }
 
 final class CustomPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    let firstVC = UIHostingController(rootView: Text("First VC"))
-    let secondVC = UIHostingController(rootView: Text("Second VC"))
-    let thirdVC = UIHostingController(rootView: Text("Third VC"))
+    var allVCs: [UIViewController] = []
     
-    lazy var allVCs: [UIViewController] = [
-        firstVC, secondVC, thirdVC
-    ]
-    
-    init() {
+    init(imageNames: [String]) {
         UIPageControl.appearance().pageIndicatorTintColor = .systemGray5
         UIPageControl.appearance().currentPageIndicatorTintColor = .systemBlue
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+        allVCs = imageNames.map { imageName in
+            let image = Image(imageName)
+                .resizable()
+                .scaledToFill()
+            let vc = UIHostingController(rootView: image)
+            vc.view.clipsToBounds = true
+            return vc
+        }
+        setViewControllers([allVCs.first!], direction: .forward, animated: true, completion: nil)
         dataSource = self
         delegate = self
     }
@@ -63,9 +71,9 @@ final class CustomPageViewController: UIPageViewController, UIPageViewController
 
 struct DestinationHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        DestinationHeaderView()
         NavigationView {
             PopularDestinationDetailsView(destination: .init(name: "Paris", country: "France", imageName: "eiffel_tower", latitude: 48.859565, longitude: 2.353235))
         }
+        DestinationHeaderView(imageNames: ["eiffel_tower", "art1", "art2"])
     }
 }

@@ -69,7 +69,7 @@ struct PopularDestinationDetailsView: View {
     
     var body: some View {
         ScrollView {
-            DestinationHeaderView()
+            DestinationHeaderView(imageNames: ["eiffel_tower", "art1", "art2"])
                 .frame(height: 250)
             VStack(alignment: .leading) {
                 Text(destination.name)
