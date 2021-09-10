@@ -35,7 +35,9 @@ final class CustomPageViewController: UIPageViewController, UIPageViewController
             vc.view.clipsToBounds = true
             return vc
         }
-        setViewControllers([allVCs.first!], direction: .forward, animated: true, completion: nil)
+        if let firstVC = allVCs.first {
+            setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+        }
         dataSource = self
         delegate = self
     }
